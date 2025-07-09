@@ -153,4 +153,4 @@ All data is automatically stored in the `data/` directory:
 
 **Developed by**: Hospital Management System Team  
 **Version**: 1.0  
-**Last Updated**: January 2025
+**Last Updated**: July 2025
