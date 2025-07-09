@@ -56,7 +56,7 @@ public class AppointmentManagerTestDemo {
     private static void runTest(int testNumber, String testName, TestCase testCase) {
         totalTests++;
         System.out.println("\n Test Case " + testNumber + ": " + testName);
-        System.out.println("─".repeat(60));
+        System.out.println("".repeat(60));
         
         try {
             boolean result = testCase.run();
@@ -80,7 +80,7 @@ public class AppointmentManagerTestDemo {
         System.out.println(" Total Tests: " + totalTests);
         System.out.println(" Passed: " + passedTests);
         System.out.println(" Failed: " + failedTests);
-        System.out.println("📈 Success Rate: " + String.format("%.1f%%", (double) passedTests / totalTests * 100));
+        System.out.println(" Success Rate: " + String.format("%.1f%%", (double) passedTests / totalTests * 100));
         
         if (failedTests == 0) {
             System.out.println("\n ALL TESTS PASSED! The appointment system is working correctly.");
