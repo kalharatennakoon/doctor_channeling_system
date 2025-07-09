@@ -8,7 +8,7 @@ public class AppointmentManagerTestDemo {
     private static int failedTests = 0;
     
     public static void main(String[] args) {
-        System.out.println("🧪 APPOINTMENT MANAGER TEST SUITE - DEMO (with intentional failures)");
+        System.out.println(" APPOINTMENT MANAGER TEST SUITE - DEMO (with intentional failures)");
         System.out.println("====================================================================");
         
         AppointmentManager manager = new AppointmentManager();
@@ -55,37 +55,37 @@ public class AppointmentManagerTestDemo {
     
     private static void runTest(int testNumber, String testName, TestCase testCase) {
         totalTests++;
-        System.out.println("\n🧪 Test Case " + testNumber + ": " + testName);
+        System.out.println("\n Test Case " + testNumber + ": " + testName);
         System.out.println("─".repeat(60));
         
         try {
             boolean result = testCase.run();
             if (result) {
                 passedTests++;
-                System.out.println("✅ PASSED: " + testName);
+                System.out.println(" PASSED: " + testName);
             } else {
                 failedTests++;
-                System.out.println("❌ FAILED: " + testName);
+                System.out.println(" FAILED: " + testName);
             }
         } catch (Exception e) {
             failedTests++;
-            System.out.println("❌ ERROR: " + testName + " - " + e.getMessage());
+            System.out.println(" ERROR: " + testName + " - " + e.getMessage());
         }
     }
     
     private static void printTestSummary() {
         System.out.println("\n" + "=".repeat(60));
-        System.out.println("📊 TEST RESULTS SUMMARY");
+        System.out.println(" TEST RESULTS SUMMARY");
         System.out.println("=".repeat(60));
-        System.out.println("🧪 Total Tests: " + totalTests);
-        System.out.println("✅ Passed: " + passedTests);
-        System.out.println("❌ Failed: " + failedTests);
+        System.out.println(" Total Tests: " + totalTests);
+        System.out.println(" Passed: " + passedTests);
+        System.out.println(" Failed: " + failedTests);
         System.out.println("📈 Success Rate: " + String.format("%.1f%%", (double) passedTests / totalTests * 100));
         
         if (failedTests == 0) {
-            System.out.println("\n🎉 ALL TESTS PASSED! The appointment system is working correctly.");
+            System.out.println("\n ALL TESTS PASSED! The appointment system is working correctly.");
         } else {
-            System.out.println("\n⚠️  Some tests failed. Please check the implementation.");
+            System.out.println("\n  Some tests failed. Please check the implementation.");
         }
         System.out.println("=".repeat(60));
     }

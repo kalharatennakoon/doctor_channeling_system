@@ -18,7 +18,7 @@ public class AppointmentManager {
     
     // Load data from CSV files at startup
     private void loadDataFromCSV() {
-        System.out.println("\n🔄 LOADING DATA FROM CSV FILES...");
+        System.out.println("\nLOADING DATA FROM CSV FILES...");
         System.out.println("=".repeat(50));
         
         // Load doctors from CSV
@@ -43,7 +43,7 @@ public class AppointmentManager {
         }
         
         System.out.println("=".repeat(50));
-        System.out.println("✅ DATA LOADING COMPLETE");
+        System.out.println("DATA LOADING COMPLETE");
     }
 
     public void registerDoctor(Doctor doctor) {
@@ -68,20 +68,20 @@ public class AppointmentManager {
 
     public void displayAvailableDoctors() {
         System.out.println("\n" + "=".repeat(60));
-        System.out.println("📋 AVAILABLE DOCTORS");
+        System.out.println("AVAILABLE DOCTORS");
         System.out.println("=".repeat(60));
         
         if (doctors.isEmpty()) {
-            System.out.println("❌ No doctors registered yet.");
+            System.out.println("No doctors registered yet.");
             return;
         }
         
         for (Doctor d : doctors) {
             if (!d.getAvailableTimeSlots().isEmpty()) {
-                System.out.println("🩺 " + d);
-                System.out.println("   � Registration: " + d.getRegistrationNumber() + " | ID: " + d.getDoctorId());
-                System.out.println("   �📅 Available Slots: " + d.getAvailableTimeSlots());
-                System.out.println("   💰 Consultation Fee: Rs. " + String.format("%.2f", d.getConsultationFee()));
+                System.out.println("Dr. " + d);
+                System.out.println("   Registration: " + d.getRegistrationNumber() + " | ID: " + d.getDoctorId());
+                System.out.println("   Available Slots: " + d.getAvailableTimeSlots());
+                System.out.println("   Consultation Fee: Rs. " + String.format("%.2f", d.getConsultationFee()));
                 System.out.println("   " + "-".repeat(55));
             }
         }
@@ -102,23 +102,23 @@ public class AppointmentManager {
             Appointment appt = new Appointment(appointmentId, patient, doctor, timeSlot);
             appointments.add(appt);
             doctor.bookTimeSlot(timeSlot);
-            System.out.println("✅ SUCCESS: Appointment booked for " + patient.getName());
-            System.out.println("   📋 Appointment ID: " + appointmentId);
-            System.out.println("   👨‍⚕️ Doctor: " + doctor.getName() + " (" + doctor.getSpecialization() + ")");
-            System.out.println("   🕒 Time: " + timeSlot);
-            System.out.println("   💰 Fee: Rs. " + String.format("%.2f", doctor.getConsultationFee()));
+            System.out.println("SUCCESS: Appointment booked for " + patient.getName());
+            System.out.println("   Appointment ID: " + appointmentId);
+            System.out.println("   Doctor: " + doctor.getName() + " (" + doctor.getSpecialization() + ")");
+            System.out.println("   Time: " + timeSlot);
+            System.out.println("   Fee: Rs. " + String.format("%.2f", doctor.getConsultationFee()));
             // Save to CSV after booking appointment
             CSVManager.saveAllData(this);
         } else {
-            System.out.println("⚠️  CONFLICT: Time slot " + timeSlot + " is not available!");
-            System.out.println("   📝 Adding " + patient.getName() + " to reschedule queue...");
+            System.out.println("CONFLICT: Time slot " + timeSlot + " is not available!");
+            System.out.println("   Adding " + patient.getName() + " to reschedule queue...");
             rescheduleQueue.offer(patient);
-            System.out.println("   📊 Queue Position: " + rescheduleQueue.size());
+            System.out.println("   Queue Position: " + rescheduleQueue.size());
         }
     }
 
     public void cancelAppointment(String patientName) {
-        System.out.println("\n🔄 PROCESSING CANCELLATION...");
+        System.out.println("\n PROCESSING CANCELLATION...");
         Appointment toRemove = null;
         for (Appointment appt : appointments) {
             if (appt.getPatient().getName().equalsIgnoreCase(patientName)) {
@@ -131,30 +131,30 @@ public class AppointmentManager {
             cancellationHistory.push(toRemove);
             // Free up the time slot
             toRemove.getDoctor().freeTimeSlot(toRemove.getTimeSlot());
-            System.out.println("❌ CANCELLED: " + toRemove.getPatient().getName() + "'s appointment");
-            System.out.println("   🕒 Freed slot: " + toRemove.getTimeSlot() + " with Dr. " + toRemove.getDoctor().getName());
+            System.out.println(" CANCELLED: " + toRemove.getPatient().getName() + "'s appointment");
+            System.out.println("    Freed slot: " + toRemove.getTimeSlot() + " with Dr. " + toRemove.getDoctor().getName());
             
             if (!rescheduleQueue.isEmpty()) {
                 Patient next = rescheduleQueue.poll();
-                System.out.println("🔄 AUTO-RESCHEDULING from queue...");
+                System.out.println(" AUTO-RESCHEDULING from queue...");
                 bookAppointment(next, toRemove.getDoctor(), toRemove.getTimeSlot());
             } else {
-                System.out.println("📋 No patients in reschedule queue. Slot remains open.");
+                System.out.println(" No patients in reschedule queue. Slot remains open.");
             }
             // Save to CSV after cancellation
             CSVManager.saveAllData(this);
         } else {
-            System.out.println("❌ ERROR: No appointment found for patient '" + patientName + "'");
+            System.out.println(" ERROR: No appointment found for patient '" + patientName + "'");
         }
     }
 
     public void displayAppointments() {
         System.out.println("\n" + "=".repeat(60));
-        System.out.println("📅 CURRENT APPOINTMENTS SCHEDULE");
+        System.out.println(" CURRENT APPOINTMENTS SCHEDULE");
         System.out.println("=".repeat(60));
         
         if (appointments.isEmpty()) {
-            System.out.println("📋 No appointments scheduled yet.");
+            System.out.println(" No appointments scheduled yet.");
             return;
         }
         
@@ -170,38 +170,38 @@ public class AppointmentManager {
             List<Appointment> doctorAppts = appointmentsByDoctor.get(doctorName);
             Doctor doctor = doctorAppts.get(0).getDoctor();
             
-            System.out.println("🩺 Dr. " + doctorName + " (" + doctor.getSpecialization() + ")");
-            System.out.println("   💰 Fee: Rs. " + String.format("%.2f", doctor.getConsultationFee()));
+            System.out.println(" Dr. " + doctorName + " (" + doctor.getSpecialization() + ")");
+            System.out.println("    Fee: Rs. " + String.format("%.2f", doctor.getConsultationFee()));
             
             for (Appointment appt : doctorAppts) {
                 Patient patient = appt.getPatient();
-                System.out.println("   📍 " + appt.getTimeSlot() + " → " + patient.getName() + 
+                System.out.println("    " + appt.getTimeSlot() + "  " + patient.getName() + 
                                  " (Age: " + patient.getAge() + ", " + patient.getCity() + ")");
-                System.out.println("      � Appointment ID: " + appt.getAppointmentId() + " | Patient ID: " + patient.getPatientId());
-                System.out.println("      �📱 " + patient.getMobile() + " | 📧 " + patient.getEmail());
-                System.out.println("      🏥 Medical History: " + patient.getMedicalHistory());
+                System.out.println("       Appointment ID: " + appt.getAppointmentId() + " | Patient ID: " + patient.getPatientId());
+                System.out.println("       " + patient.getMobile() + " |  " + patient.getEmail());
+                System.out.println("       Medical History: " + patient.getMedicalHistory());
                 totalAppointments++;
             }
             System.out.println("   " + "-".repeat(55));
         }
         
-        System.out.println("📊 Total Appointments: " + totalAppointments);
+        System.out.println(" Total Appointments: " + totalAppointments);
         if (!rescheduleQueue.isEmpty()) {
-            System.out.println("⏳ Patients in Reschedule Queue: " + rescheduleQueue.size());
+            System.out.println(" Patients in Reschedule Queue: " + rescheduleQueue.size());
         }
     }
     
     public void displayCancellationHistory() {
         System.out.println("\n" + "=".repeat(60));
-        System.out.println("❌ CANCELLATION HISTORY");
+        System.out.println(" CANCELLATION HISTORY");
         System.out.println("=".repeat(60));
         
         if (cancellationHistory.isEmpty()) {
-            System.out.println("📋 No cancellations recorded yet.");
+            System.out.println(" No cancellations recorded yet.");
             return;
         }
         
-        System.out.println("📊 Total Cancellations: " + cancellationHistory.size());
+        System.out.println(" Total Cancellations: " + cancellationHistory.size());
         System.out.println("-".repeat(60));
         
         // Display cancellations in reverse order (most recent first)
@@ -212,27 +212,27 @@ public class AppointmentManager {
             Patient patient = cancelledAppt.getPatient();
             Doctor doctor = cancelledAppt.getDoctor();
             
-            System.out.println("🗂️ Cancellation Details:");
-            System.out.println("   📋 Appointment ID: " + cancelledAppt.getAppointmentId());
-            System.out.println("   👤 Patient: " + patient.getName() + " (ID: " + patient.getPatientId() + ")");
-            System.out.println("   🩺 Doctor: Dr. " + doctor.getName() + " (" + doctor.getSpecialization() + ")");
-            System.out.println("   📅 Time Slot: " + cancelledAppt.getTimeSlot());
-            System.out.println("   📱 Contact: " + patient.getMobile() + " | 📧 " + patient.getEmail());
-            System.out.println("   🏥 Medical History: " + patient.getMedicalHistory());
+            System.out.println(" Cancellation Details:");
+            System.out.println("    Appointment ID: " + cancelledAppt.getAppointmentId());
+            System.out.println("    Patient: " + patient.getName() + " (ID: " + patient.getPatientId() + ")");
+            System.out.println("    Doctor: Dr. " + doctor.getName() + " (" + doctor.getSpecialization() + ")");
+            System.out.println("    Time Slot: " + cancelledAppt.getTimeSlot());
+            System.out.println("    Contact: " + patient.getMobile() + " |  " + patient.getEmail());
+            System.out.println("    Medical History: " + patient.getMedicalHistory());
             System.out.println("   " + "-".repeat(55));
         }
         
-        System.out.println("📊 Total Cancellations: " + cancellationHistory.size());
+        System.out.println(" Total Cancellations: " + cancellationHistory.size());
     }
     
     public void displaySystemStatus() {
         System.out.println("\n" + "=".repeat(60));
-        System.out.println("🏥 HOSPITAL APPOINTMENT SYSTEM STATUS");
+        System.out.println(" HOSPITAL APPOINTMENT SYSTEM STATUS");
         System.out.println("=".repeat(60));
-        System.out.println("👨‍⚕️ Total Doctors: " + doctors.size());
-        System.out.println("📅 Active Appointments: " + appointments.size());
-        System.out.println("⏳ Reschedule Queue: " + rescheduleQueue.size());
-        System.out.println("🗂️ Cancellation History: " + cancellationHistory.size());
+        System.out.println(" Total Doctors: " + doctors.size());
+        System.out.println(" Active Appointments: " + appointments.size());
+        System.out.println(" Reschedule Queue: " + rescheduleQueue.size());
+        System.out.println(" Cancellation History: " + cancellationHistory.size());
         System.out.println("=".repeat(60));
     }
     
@@ -255,7 +255,7 @@ public class AppointmentManager {
     
     public void printHeader(String title) {
         System.out.println("\n" + "=".repeat(60));
-        System.out.println("🏥 " + title);
+        System.out.println(" " + title);
         System.out.println("=".repeat(60));
     }
     

@@ -25,7 +25,7 @@ public class CSVManager {
         File dataDir = new File(DATA_DIR);
         if (!dataDir.exists()) {
             dataDir.mkdirs();
-            System.out.println("📁 Created data directory: data/");
+            System.out.println(" Created data directory: data/");
         }
     }
     
@@ -53,10 +53,10 @@ public class CSVManager {
                 );
             }
             if (verbose) {
-                System.out.println("✅ Doctors data saved to data/doctors.csv");
+                System.out.println(" Doctors data saved to data/doctors.csv");
             }
         } catch (IOException e) {
-            System.err.println("❌ Error saving doctors: " + e.getMessage());
+            System.err.println(" Error saving doctors: " + e.getMessage());
         }
     }
     
@@ -85,10 +85,10 @@ public class CSVManager {
                 );
             }
             if (verbose) {
-                System.out.println("✅ Patients data saved to data/patients.csv");
+                System.out.println(" Patients data saved to data/patients.csv");
             }
         } catch (IOException e) {
-            System.err.println("❌ Error saving patients: " + e.getMessage());
+            System.err.println(" Error saving patients: " + e.getMessage());
         }
     }
     
@@ -118,10 +118,10 @@ public class CSVManager {
                 );
             }
             if (verbose) {
-                System.out.println("✅ Appointments data saved to data/appointments.csv");
+                System.out.println(" Appointments data saved to data/appointments.csv");
             }
         } catch (IOException e) {
-            System.err.println("❌ Error saving appointments: " + e.getMessage());
+            System.err.println(" Error saving appointments: " + e.getMessage());
         }
     }
     
@@ -158,10 +158,10 @@ public class CSVManager {
                 );
             }
             if (verbose) {
-                System.out.println("✅ Cancellation history saved to data/cancellations.csv");
+                System.out.println(" Cancellation history saved to data/cancellations.csv");
             }
         } catch (IOException e) {
-            System.err.println("❌ Error saving cancellations: " + e.getMessage());
+            System.err.println(" Error saving cancellations: " + e.getMessage());
         }
     }
     
@@ -173,7 +173,7 @@ public class CSVManager {
     // Save all data at once with verbose option
     public static void saveAllData(AppointmentManager manager, boolean verbose) {
         if (verbose) {
-            System.out.println("\n💾 SAVING ALL DATA TO CSV FILES...");
+            System.out.println("\n SAVING ALL DATA TO CSV FILES...");
             System.out.println("=".repeat(50));
         }
         
@@ -208,7 +208,7 @@ public class CSVManager {
         if (verbose) {
             createConfigFile();
             System.out.println("=".repeat(50));
-            System.out.println("🎉 ALL DATA SUCCESSFULLY SAVED TO: data/");
+            System.out.println(" ALL DATA SUCCESSFULLY SAVED TO: data/");
         }
     }
     
@@ -218,7 +218,7 @@ public class CSVManager {
         File file = new File(DOCTORS_FILE);
         
         if (!file.exists()) {
-            System.out.println("📄 No doctors file found in data/. Starting fresh.");
+            System.out.println(" No doctors file found in data/. Starting fresh.");
             return doctors;
         }
         
@@ -248,9 +248,9 @@ public class CSVManager {
                     doctors.add(new Doctor(doctorId, registrationNumber, name, specialization, timeSlots, consultationFee));
                 }
             }
-            System.out.println("✅ Loaded " + doctors.size() + " doctors from data/doctors.csv");
+            System.out.println(" Loaded " + doctors.size() + " doctors from data/doctors.csv");
         } catch (IOException | NumberFormatException e) {
-            System.err.println("❌ Error loading doctors: " + e.getMessage());
+            System.err.println(" Error loading doctors: " + e.getMessage());
         }
         
         return doctors;
@@ -262,7 +262,7 @@ public class CSVManager {
         File file = new File(PATIENTS_FILE);
         
         if (!file.exists()) {
-            System.out.println("📄 No patients file found in data/. Starting fresh.");
+            System.out.println(" No patients file found in data/. Starting fresh.");
             return patients;
         }
         
@@ -283,9 +283,9 @@ public class CSVManager {
                     patients.add(new Patient(patientId, name, mobile, email, city, age, medicalHistory));
                 }
             }
-            System.out.println("✅ Loaded " + patients.size() + " patients from data/patients.csv");
+            System.out.println(" Loaded " + patients.size() + " patients from data/patients.csv");
         } catch (IOException | NumberFormatException e) {
-            System.err.println("❌ Error loading patients: " + e.getMessage());
+            System.err.println(" Error loading patients: " + e.getMessage());
         }
         
         return patients;
@@ -297,7 +297,7 @@ public class CSVManager {
         File file = new File(APPOINTMENTS_FILE);
         
         if (!file.exists()) {
-            System.out.println("📄 No appointments file found in data/. Starting fresh.");
+            System.out.println(" No appointments file found in data/. Starting fresh.");
             return appointments;
         }
         
@@ -323,9 +323,9 @@ public class CSVManager {
                     }
                 }
             }
-            System.out.println("✅ Loaded " + appointments.size() + " appointments from data/appointments.csv");
+            System.out.println(" Loaded " + appointments.size() + " appointments from data/appointments.csv");
         } catch (IOException | NumberFormatException e) {
-            System.err.println("❌ Error loading appointments: " + e.getMessage());
+            System.err.println(" Error loading appointments: " + e.getMessage());
         }
         
         return appointments;
@@ -337,7 +337,7 @@ public class CSVManager {
         File file = new File(CANCELLATIONS_FILE);
         
         if (!file.exists()) {
-            System.out.println("📄 No cancellations file found in data/. Starting fresh.");
+            System.out.println(" No cancellations file found in data/. Starting fresh.");
             return cancellations;
         }
         
@@ -370,9 +370,9 @@ public class CSVManager {
                 cancellations.push(appointment);
             }
             
-            System.out.println("✅ Loaded " + cancellations.size() + " cancellations from data/cancellations.csv");
+            System.out.println(" Loaded " + cancellations.size() + " cancellations from data/cancellations.csv");
         } catch (IOException | NumberFormatException e) {
-            System.err.println("❌ Error loading cancellations: " + e.getMessage());
+            System.err.println(" Error loading cancellations: " + e.getMessage());
         }
         
         return cancellations;
@@ -447,45 +447,45 @@ public class CSVManager {
             writer.println();
             writer.println("This directory contains all the CSV data files for the system:");
             writer.println();
-            writer.println("📁 DATA STRUCTURE:");
-            writer.println("├── doctors.csv      - Doctor information and available slots");
-            writer.println("├── patients.csv     - Patient details and medical history");
-            writer.println("├── appointments.csv - Active appointment records");
-            writer.println("├── cancellations.csv- Cancelled appointment history");
-            writer.println("└── README.txt       - This configuration file");
+            writer.println(" DATA STRUCTURE:");
+            writer.println(" doctors.csv      - Doctor information and available slots");
+            writer.println(" patients.csv     - Patient details and medical history");
+            writer.println(" appointments.csv - Active appointment records");
+            writer.println(" cancellations.csv- Cancelled appointment history");
+            writer.println(" README.txt       - This configuration file");
             writer.println();
-            writer.println("📋 FILE DESCRIPTIONS:");
+            writer.println(" FILE DESCRIPTIONS:");
             writer.println("doctors.csv     : Contains doctor ID, name, specialization, fees, and available time slots");
             writer.println("patients.csv    : Contains patient name, contact info, age, city, and medical history");
             writer.println("appointments.csv: Contains current appointments with patient-doctor-time mappings");
             writer.println("cancellations.csv: Contains history of cancelled appointments for audit trail");
             writer.println();
-            writer.println("🔄 USAGE:");
+            writer.println(" USAGE:");
             writer.println("- All files are automatically created and updated by the system");
             writer.println("- Files are in CSV format for easy import/export to other systems");
             writer.println("- Data is saved automatically after every operation");
             writer.println("- Manual editing is not recommended - use the system interface");
             writer.println();
-            writer.println("⚠️  IMPORTANT:");
+            writer.println("  IMPORTANT:");
             writer.println("- Do not delete or modify these files manually");
             writer.println("- Keep this directory secure and backed up");
             writer.println("- All data is stored in plain text CSV format");
             
-            System.out.println("📄 Configuration file created: data/README.txt");
+            System.out.println(" Configuration file created: data/README.txt");
         } catch (IOException e) {
-            System.err.println("❌ Error creating config file: " + e.getMessage());
+            System.err.println(" Error creating config file: " + e.getMessage());
         }
     }
     
     // Get file paths for reference
     public static void showFilePaths() {
-        System.out.println("\n📁 CSV FILES LOCATION:");
+        System.out.println("\n CSV FILES LOCATION:");
         System.out.println("=".repeat(50));
-        System.out.println("📂 Data Directory: data/");
-        System.out.println("👨‍⚕️ Doctors: data/doctors.csv");
-        System.out.println("🏥 Patients: data/patients.csv");
-        System.out.println("📅 Appointments: data/appointments.csv");
-        System.out.println("❌ Cancellations: data/cancellations.csv");
+        System.out.println(" Data Directory: data/");
+        System.out.println(" Doctors: data/doctors.csv");
+        System.out.println(" Patients: data/patients.csv");
+        System.out.println(" Appointments: data/appointments.csv");
+        System.out.println(" Cancellations: data/cancellations.csv");
         System.out.println("=".repeat(50));
     }
 }
