@@ -1,0 +1,24 @@
+# Compiled class files
+*.class
+bin/
+
+# Data files (generated at runtime)
+data/*.csv
+data/README.txt
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Test artifacts
+test_*.txt
