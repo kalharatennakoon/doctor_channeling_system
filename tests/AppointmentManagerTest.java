@@ -12,7 +12,7 @@ public class AppointmentManagerTest {
         AppointmentManager manager = new AppointmentManager();
 
         List<String> slots = Arrays.asList("09:00AM", "10:00AM", "11:00AM");
-        Doctor d1 = new Doctor("D001", "REG001", "Dr. Fernando Silva", "Dermatology", new ArrayList<>(slots), 1500);
+        Doctor d1 = new Doctor("DOC011", "REG011", "Dr. Fernando Silva", "Dermatology", new ArrayList<>(slots), 1500);
         manager.registerDoctor(d1);
 
         // Register patients
@@ -25,19 +25,21 @@ public class AppointmentManagerTest {
         Patient p7 = new Patient("PAT007", "Chamara", "0777777777", "chamara@gmail.com", "Badulla", 40, "Headache");
 
         // Test Cases
+        int initialAppointments = manager.appointments.size(); // Get current number of appointments
+        
         runTest(1, "Book valid slot", () -> {
             manager.bookAppointment(p1, d1, "09:00AM");
-            return manager.appointments.size() == 1; // Should have 1 appointment
+            return manager.appointments.size() == initialAppointments + 1; // Should have 1 more appointment
         });
 
         runTest(2, "Book another valid slot", () -> {
             manager.bookAppointment(p2, d1, "10:00AM");
-            return manager.appointments.size() == 2; // Should have 2 appointments
+            return manager.appointments.size() == initialAppointments + 2; // Should have 2 more appointments
         });
 
         runTest(3, "Book final available slot", () -> {
             manager.bookAppointment(p3, d1, "11:00AM");
-            return manager.appointments.size() == 3; // Should have 3 appointments
+            return manager.appointments.size() == initialAppointments + 3; // Should have 3 more appointments
         });
 
         runTest(4, "Try to book already taken slot", () -> {
@@ -54,14 +56,26 @@ public class AppointmentManagerTest {
 
         runTest(6, "Cancel an appointment (Suresh)", () -> {
             int queueBefore = manager.rescheduleQueue.size();
+            int historyBefore = manager.cancellationHistory.size();
+            int appointmentsBefore = manager.appointments.size();
             manager.cancelAppointment("Suresh"); // p4 should be assigned
-            return manager.rescheduleQueue.size() == queueBefore - 1 && manager.cancellationHistory.size() == 1;
+            // Check: queue decreased by 1, history increased by 1, Nadeesha now has an appointment
+            boolean queueOk = manager.rescheduleQueue.size() == queueBefore - 1;
+            boolean historyOk = manager.cancellationHistory.size() == historyBefore + 1;
+            boolean appointmentOk = manager.appointments.stream().anyMatch(a -> a.getPatient().getName().equals("Nadeesha") && a.getTimeSlot().equals("09:00AM"));
+            return queueOk && historyOk && appointmentOk;
         });
 
         runTest(7, "Cancel another appointment (Kamal)", () -> {
             int queueBefore = manager.rescheduleQueue.size();
+            int historyBefore = manager.cancellationHistory.size();
+            int appointmentsBefore = manager.appointments.size();
             manager.cancelAppointment("Kamal"); // p5 should be assigned
-            return manager.rescheduleQueue.size() == queueBefore - 1 && manager.cancellationHistory.size() == 2;
+            // Check: queue decreased by 1, history increased by 1, Ruwan now has an appointment
+            boolean queueOk = manager.rescheduleQueue.size() == queueBefore - 1;
+            boolean historyOk = manager.cancellationHistory.size() == historyBefore + 1;
+            boolean appointmentOk = manager.appointments.stream().anyMatch(a -> a.getPatient().getName().equals("Ruwan") && a.getTimeSlot().equals("10:00AM"));
+            return queueOk && historyOk && appointmentOk;
         });
 
         runTest(8, "Try to cancel non-existent appointment", () -> {
@@ -73,8 +87,12 @@ public class AppointmentManagerTest {
 
         runTest(9, "Cancel remaining appointment (Sunil)", () -> {
             int appointmentsBefore = manager.appointments.size();
+            int historyBefore = manager.cancellationHistory.size();
             manager.cancelAppointment("Sunil");
-            return manager.appointments.size() == appointmentsBefore - 1 && manager.cancellationHistory.size() == 3;
+            // No one in queue, so just check appointment count and history
+            boolean appointmentsOk = manager.appointments.size() == appointmentsBefore - 1;
+            boolean historyOk = manager.cancellationHistory.size() == historyBefore + 1;
+            return appointmentsOk && historyOk;
         });
 
         runTest(10, "Book remaining slot (now available again)", () -> {

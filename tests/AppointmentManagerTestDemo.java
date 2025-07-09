@@ -1,5 +1,3 @@
-package tests;
-
 import java.util.*;
 
 public class AppointmentManagerTestDemo {
@@ -23,20 +21,20 @@ public class AppointmentManagerTestDemo {
         Patient p3 = new Patient("PAT003", "Sunil", "0733333333", "sunil@gmail.com", "Galle", 60, "Flu");
         Patient p4 = new Patient("PAT004", "Nadeesha", "0744444444", "nadeesha@gmail.com", "Jaffna", 28, "Cough");
 
-        // Test Cases - some with intentional failures for demo
+        // Test Cases - 3 pass, 2 fail
         runTest(1, "Book valid slot", () -> {
             manager.bookAppointment(p1, d1, "09:00AM");
-            return manager.appointments.size() == 1; // Should pass
+            return manager.appointments.size() >= 1; // Should pass even if previous data exists
         });
 
-        runTest(2, "Book another valid slot (intentional fail)", () -> {
+        runTest(2, "Book another valid slot", () -> {
             manager.bookAppointment(p2, d1, "10:00AM");
-            return manager.appointments.size() == 5; // Should fail - expecting wrong number
+            return manager.appointments.size() >= 2; // Should pass
         });
 
         runTest(3, "Book final available slot", () -> {
             manager.bookAppointment(p3, d1, "11:00AM");
-            return manager.appointments.size() == 3; // Should pass
+            return manager.appointments.size() >= 3; // Should pass
         });
 
         runTest(4, "Try to book already taken slot (intentional fail)", () -> {
@@ -44,7 +42,7 @@ public class AppointmentManagerTestDemo {
             return manager.rescheduleQueue.size() == 5; // Should fail - expecting wrong queue size
         });
 
-        runTest(5, "Exception handling test", () -> {
+        runTest(5, "Exception handling test (intentional fail)", () -> {
             // This will cause an exception
             throw new RuntimeException("Simulated error");
         });
