@@ -248,9 +248,8 @@ public class CSVManager {
                     doctors.add(new Doctor(doctorId, registrationNumber, name, specialization, timeSlots, consultationFee));
                 }
             }
-            System.out.println(" Loaded " + doctors.size() + " doctors from data/doctors.csv");
         } catch (IOException | NumberFormatException e) {
-            System.err.println(" Error loading doctors: " + e.getMessage());
+            System.err.println("Error loading doctors: " + e.getMessage());
         }
         
         return doctors;
@@ -283,9 +282,8 @@ public class CSVManager {
                     patients.add(new Patient(patientId, name, mobile, email, city, age, medicalHistory));
                 }
             }
-            System.out.println(" Loaded " + patients.size() + " patients from data/patients.csv");
         } catch (IOException | NumberFormatException e) {
-            System.err.println(" Error loading patients: " + e.getMessage());
+            System.err.println("Error loading patients: " + e.getMessage());
         }
         
         return patients;
@@ -323,9 +321,8 @@ public class CSVManager {
                     }
                 }
             }
-            System.out.println(" Loaded " + appointments.size() + " appointments from data/appointments.csv");
         } catch (IOException | NumberFormatException e) {
-            System.err.println(" Error loading appointments: " + e.getMessage());
+            System.err.println("Error loading appointments: " + e.getMessage());
         }
         
         return appointments;
@@ -370,9 +367,8 @@ public class CSVManager {
                 cancellations.push(appointment);
             }
             
-            System.out.println(" Loaded " + cancellations.size() + " cancellations from data/cancellations.csv");
         } catch (IOException | NumberFormatException e) {
-            System.err.println(" Error loading cancellations: " + e.getMessage());
+            System.err.println("Error loading cancellations: " + e.getMessage());
         }
         
         return cancellations;

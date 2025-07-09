@@ -18,9 +18,6 @@ public class AppointmentManager {
     
     // Load data from CSV files at startup
     private void loadDataFromCSV() {
-        System.out.println("\nLOADING DATA FROM CSV FILES...");
-        System.out.println("=".repeat(50));
-        
         // Load doctors from CSV
         List<Doctor> loadedDoctors = CSVManager.loadDoctors();
         if (loadedDoctors != null && !loadedDoctors.isEmpty()) {
@@ -41,9 +38,6 @@ public class AppointmentManager {
         if (loadedCancellations != null && !loadedCancellations.isEmpty()) {
             cancellationHistory.addAll(loadedCancellations);
         }
-        
-        System.out.println("=".repeat(50));
-        System.out.println("DATA LOADING COMPLETE");
     }
 
     public void registerDoctor(Doctor doctor) {
