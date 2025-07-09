@@ -1,16 +1,3 @@
-/* 
-    HOSPITAL APPOINTMENT MANAGEMENT SYSTEM
-    =========================================
-    Features:
-    - Registration of doctors and patients
-    - Display of available doctors
-    - Appointment booking with conflict handling
-    - Cancellation and reallocation from the reschedule queue
-    - Real-time appointment status tracking
-    - Queue management for rescheduling
-    - Stack-based cancellation history
-*/
-
 import java.util.*;
 
 public class Main {
